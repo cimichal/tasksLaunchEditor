@@ -1,0 +1,18 @@
+{
+  "config": {
+    "prefix": "${workspaceRoot}",
+    "dllPath": "/bin/Debug/netcoreapp2.2"
+  },
+  "solutions": [
+    {
+      "key": "strumienie",
+      "value": "/przyklady__c#_7/strumienie",
+      "active":  "true"
+    },
+    {
+      "key": "colections",
+      "value": "/przyklady__c#_7/collections/colections",
+      "active":  "false"
+    }
+  ]
+}
