@@ -1,18 +1,37 @@
 {
   "config": {
     "prefix": "${workspaceRoot}",
-    "dllPath": "/bin/Debug/netcoreapp2.2"
+    "dllPath": "/bin/Debug/netcoreapp2.2",
+    "active": "serializacja"
   },
   "solutions": [
     {
       "key": "strumienie",
-      "value": "/przyklady__c#_7/strumienie",
-      "active":  "true"
+      "value": "/przyklady__c#_7/strumienie"
     },
     {
       "key": "colections",
-      "value": "/przyklady__c#_7/collections/colections",
-      "active":  "false"
+      "value": "/przyklady__c#_7/collections/colections"
+    },
+    {
+      "key": "iteratory",
+      "value": "/przyklady__c#_7/iteratory"
+    },
+    {
+      "key": "serializacja",
+      "value": "/przyklady__c#_7/serializacja"
+    },
+    {
+      "key": "threads",
+      "value": "/przyklady__c#_7/threads"
+    },
+    {
+      "key": "check_nunit",
+      "value": "/utest/check_nunit"
+    },
+    {
+      "key": "utest_nunit",
+      "value": "/utest/utest_nunit"
     }
   ]
 }

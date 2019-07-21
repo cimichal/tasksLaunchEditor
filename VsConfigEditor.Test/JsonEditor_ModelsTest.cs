@@ -73,21 +73,6 @@ namespace Tests
         }
 
         [Test]
-        public void JsonConfig__GetActiveSolution__ShouldReturnSingleSolution()
-        {
-            var moqJsonConfig = new JsonConfig();
-            moqJsonConfig.Solutions = new List<Solution>()
-                {
-                    new Solution() { Active = false },
-                    new Solution() { Active = true, Key = "active" }
-                };
-
-            Solution active = moqJsonConfig.GetActiveSolution();
-            Assert.IsNotNull(active);
-            Assert.AreEqual("active", active.Key);
-        }
-
-        [Test]
         public void JsonLaunch__SetupConfiguration__ShouldUpdateConfiguration()
         {
             var path = $"{_prefix}TempFile/launch.json";
@@ -104,9 +89,9 @@ namespace Tests
                 Value = "/przyklady__c#_7/collections/colections"
             });
 
-            Assert.AreEqual("${workspaceRoot}/przyklady__c#_7/collections/colections/bin/Debug/netcoreapp2.2/colections.dll", 
+            Assert.AreEqual("${workspaceFolder}/przyklady__c#_7/collections/colections/bin/Debug/netcoreapp2.2/colections.dll", 
                 lanuchConfig.Program);
-            Assert.AreEqual("${workspaceRoot}/przyklady__c#_7/collections/colections", lanuchConfig.cwd);
+            Assert.AreEqual("${workspaceFolder}/przyklady__c#_7/collections/colections", lanuchConfig.cwd);
         }
 
         [Test]

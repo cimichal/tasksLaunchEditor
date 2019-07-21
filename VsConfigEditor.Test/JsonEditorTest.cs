@@ -28,8 +28,7 @@ namespace Tests
             var jsonEditor = new JsonEditor(filesPath);
             Solution activeSolution = jsonEditor.GetActiveConfiguration();
 
-            Assert.IsTrue(activeSolution.Active);
-            Assert.AreEqual("strumienie", activeSolution.Key);
+            Assert.AreEqual("serializacja", activeSolution.Key);
         }
     }
 }
