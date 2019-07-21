@@ -11,10 +11,11 @@ namespace Tests
     public class JsonEditor_ModelsTest
     {
         public string path { get; set; }
-        public string _prefix = "C:/Users/michal/Documents/_repository/VsCodeConfigEditor/VsConfigEditor/VsConfigEditor.Test/";
+        public string _prefix;
         [SetUp]
         public void Setup()
         {
+            _prefix = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, System.AppDomain.CurrentDomain.RelativeSearchPath ?? "");
             path = $"{_prefix}TempFile/config.json";
         }
 
@@ -54,7 +55,7 @@ namespace Tests
                 jsonFile = JsonConvert.DeserializeObject<JsonLaunch>(bytes);
             }
 
-            Assert.IsNotNull(jsonFile.Configurations[0].Name);
+            Assert.IsNotNull(jsonFile.configurations[0].Name);
         }
 
         [Test]
@@ -69,7 +70,7 @@ namespace Tests
                 jsonFile = JsonConvert.DeserializeObject<JsonTask>(bytes);
             }
 
-            Assert.IsNotNull(jsonFile.Tasks[0].Args);
+            Assert.IsNotNull(jsonFile.tasks[0].Args);
         }
 
         [Test]
@@ -82,14 +83,18 @@ namespace Tests
                 string bytes = stream.ReadToEnd();
                 jsonFile = JsonConvert.DeserializeObject<JsonLaunch>(bytes);
             }
-
-            var lanuchConfig = jsonFile.SetupConfiguration(new Solution()
+            var lanuchConfig = jsonFile.SetupConfiguration(new Config()
+            {
+                active = "colections",
+                dllPath = "/bin/Debug/netcoreapp2.2",
+                prefix = "${workspaceFolder}"
+            }, new Solution()
             {
                 Key = "colections",
                 Value = "/przyklady__c#_7/collections/colections"
             });
 
-            Assert.AreEqual("${workspaceFolder}/przyklady__c#_7/collections/colections/bin/Debug/netcoreapp2.2/colections.dll", 
+            Assert.AreEqual("${workspaceFolder}/przyklady__c#_7/collections/colections/bin/Debug/netcoreapp2.2/colections.dll",
                 lanuchConfig.Program);
             Assert.AreEqual("${workspaceFolder}/przyklady__c#_7/collections/colections", lanuchConfig.cwd);
         }
@@ -105,7 +110,12 @@ namespace Tests
                 jsonFile = JsonConvert.DeserializeObject<JsonTask>(bytes);
             }
 
-            Task lanuchConfig = jsonFile.SetupConfiguration(new Solution()
+            Task lanuchConfig = jsonFile.SetupConfiguration(new Config()
+            {
+                active = "colections",
+                dllPath = "/bin/Debug/netcoreapp2.2",
+                prefix = "${workspaceFolder}"
+            }, new Solution()
             {
                 Key = "colections",
                 Value = "/przyklady__c#_7/collections/colections"

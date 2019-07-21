@@ -7,19 +7,19 @@ namespace Debugger.Models
 {
     public class JsonLaunch
     {
-        private string DefaultPrefix = "${workspaceFolder}";
-        private string BinPath = "/bin/Debug/netcoreapp2.2";
-        private string Ext = ".dll";
-        [JsonProperty("version")]
-        public string Version { get; set; }
-        [JsonProperty("configurations")]
-        public List<LaunchConfigurations> Configurations { get; set; }
 
-        public LaunchConfigurations SetupConfiguration(Solution solution)
+        public string version { get; set; }
+        public List<LaunchConfigurations> configurations { get; set; }
+
+        public LaunchConfigurations SetupConfiguration(Config config, Solution solution)
         {
-            var configuraton = Configurations.Single();
-            configuraton.Program = $"{DefaultPrefix}{solution.Value}{BinPath}/{solution.Key}{Ext}";
-            configuraton.cwd = $"{DefaultPrefix}{solution.Value}";
+            var _defaultPrefix = config.prefix;
+            var _binPath = config.dllPath;
+
+            var configuraton = configurations.Single();
+
+            configuraton.Program = $"{_defaultPrefix}{solution.Value}{_binPath}/{solution.Key}.dll";
+            configuraton.cwd = $"{_defaultPrefix}{solution.Value}";
 
             return configuraton;
         }

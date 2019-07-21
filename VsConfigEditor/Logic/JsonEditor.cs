@@ -26,6 +26,17 @@ namespace Debugger.Logic
             _filePath = filePath;
         }
 
+        public Config GetConfig()
+        {
+            JsonConfig jsonFile;
+            using (StreamReader stream = new StreamReader(_filePath[FileType.Config]))
+            {
+                string bytes = stream.ReadToEnd();
+                jsonFile = JsonConvert.DeserializeObject<JsonConfig>(bytes);
+            }
+
+            return jsonFile.Config;
+        }
         public Solution GetActiveConfiguration()
         {
             JsonConfig jsonFile; 
@@ -73,7 +84,7 @@ namespace Debugger.Logic
                     _jsonLaunch = JsonConvert.DeserializeObject<JsonLaunch>(bytes);
                 }
                 
-                _jsonLaunch.Configurations = (file as JsonLaunch).Configurations;
+                _jsonLaunch.configurations = (file as JsonLaunch).configurations;
                 string output = JsonConvert.SerializeObject(_jsonLaunch, Formatting.Indented);
                 File.WriteAllText(_launchPath, output);
             }
@@ -88,7 +99,7 @@ namespace Debugger.Logic
                     _jsonTask = JsonConvert.DeserializeObject<JsonTask>(bytes);
                 }
 
-                _jsonTask.Tasks = (file as JsonTask).Tasks;
+                _jsonTask.tasks = (file as JsonTask).tasks;
                 string output = JsonConvert.SerializeObject(_jsonTask, Formatting.Indented);
                 File.WriteAllText(_taskPath, output);
             }

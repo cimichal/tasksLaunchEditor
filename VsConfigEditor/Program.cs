@@ -21,12 +21,13 @@ namespace Debugger.Console
             };
             JsonEditor jsonEditor = new JsonEditor(filesPath);
 
-            var config = jsonEditor.GetActiveConfiguration();
+            var config = jsonEditor.GetConfig();
+            var activeSolution = jsonEditor.GetActiveConfiguration();
             var jsonLanuch = jsonEditor.LoadLunchJson();
             var jsonTask = jsonEditor.LoadTaskJson();
 
-            jsonLanuch.SetupConfiguration(config);
-            jsonTask.SetupConfiguration(config);
+            jsonLanuch.SetupConfiguration(config, activeSolution);
+            jsonTask.SetupConfiguration(config, activeSolution);
 
             jsonEditor.Update<JsonLaunch>(jsonLanuch);
             jsonEditor.Update<JsonTask>(jsonTask);

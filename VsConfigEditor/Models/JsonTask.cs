@@ -8,17 +8,16 @@ namespace Debugger.Models
 {
     public class JsonTask
     {
-        private string _defaultArg = "build";
-        private string _defaultPrefix = "${workspaceFolder}";
+        private readonly string _defaultArg = "build";
 
-        [JsonProperty("version")]
-        public string Version { get; set; }
-        [JsonProperty("tasks")]
-        public List<Task> Tasks { get; set; }
+        public string version { get; set; }
+        public List<Task> tasks { get; set; }
 
-        public Task SetupConfiguration(Solution solution)
+        public Task SetupConfiguration(Config config, Solution solution)
         {
-            var task = Tasks.Single(); ;
+            var _defaultPrefix = config.prefix;
+
+            var task = tasks.Single();
             task.Args = new List<string>();
 
             task.Args.Add(_defaultArg);
